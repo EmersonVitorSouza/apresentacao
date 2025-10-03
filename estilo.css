@@ -1,0 +1,303 @@
+@font-face {
+    font-family: 'Tusker Grotesk 3700';
+    src: url('/Fonte/TuskerGrotesk-3700Bold.eot');
+    src: local('Tusker Grotesk 3700 Bold'), local('TuskerGrotesk-3700Bold'),
+        url('/Fonte/TuskerGrotesk-3700Bold.eot?#iefix') format('embedded-opentype'),
+        url('/Fonte/TuskerGrotesk-3700Bold.woff2') format('woff2'),
+        url('/Fonte/TuskerGrotesk-3700Bold.woff') format('woff'),
+        url('/Fonte/TuskerGrotesk-3700Bold.ttf') format('truetype');
+    font-weight: bold;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Tusker Grotesk 5500';
+    src: url('/Fonte/TuskerGrotesk-5500Medium.eot');
+    src: local('Tusker Grotesk 5500 Medium'), local('TuskerGrotesk-5500Medium'),
+        url('/Fonte/TuskerGrotesk-5500Medium.eot?#iefix') format('embedded-opentype'),
+        url('/Fonte/TuskerGrotesk-5500Medium.woff2') format('woff2'),
+        url('/Fonte/TuskerGrotesk-5500Medium.woff') format('woff'),
+        url('/Fonte/TuskerGrotesk-5500Medium.ttf') format('truetype');
+    font-weight: 500;
+    font-style: normal;
+    font-display: swap;
+}
+
+/* ------------------------------ */
+/* RESET BÁSICO                   */
+/* ------------------------------ */
+* {
+    margin: 0;
+    padding: 0;
+}
+
+/* ------------------------------ */
+/* LAYOUT PRINCIPAL               */
+/* ------------------------------ */
+body {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-image: url(/img/background.png);
+    background-repeat: no-repeat;
+    background-size: cover;
+    font-family: 'Tusker Grotesk 5500';
+    color: #222222;
+}
+
+.titulo {
+    top: 2vh;
+    font-size: 2.5rem;
+    font-family: 'Tusker Grotesk 3700';
+}
+
+.conteudo {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 2em;
+}
+
+.conteudo-coluna {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5em;
+}
+
+.conteudo-sessao,
+.divisao-icone {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1em;
+}
+
+/* ------------------------------ */
+/* ÍCONES / CARDS                 */
+/* ------------------------------ */
+.img-competidor {
+    width: 100%;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
+
+.img-competidor:hover {
+    transform: scale(1.05);
+}
+
+.icone {
+    background-color: yellow;
+    border-radius: 100%;
+    overflow: hidden;
+    text-align: center;
+    width: 15vw;
+    height: 15vw;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 3em;
+
+    box-shadow: 0 0 50px #ffffffc2;
+    border: 2px solid black;
+}
+
+/* ------------------------------ */
+/* MODAL                          */
+/* ------------------------------ */
+.modal {
+    display: flex;
+    /* mantém centralização */
+    flex-direction: column;
+    opacity: 0;
+    visibility: hidden;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    background: rgba(255, 255, 255, 0.05);
+
+    justify-content: center;
+    align-items: center;
+
+    transition: opacity 0.6s ease, visibility 0.6s ease;
+    /* fade suave */
+}
+
+.modal-fechar {
+    background-color: #7272725c;
+    margin-top: 1em;
+    padding: 0.5em;
+    border-radius: 50%;
+}
+
+[vw-access-button] {
+    left: auto;
+    /* define a posição horizontal */
+    right: auto;
+    /* remove o padrão */
+    bottom: auto;
+    /* remove o padrão */
+    top: 40vh;
+    /* define a posição vertical */
+}
+
+.modal.show {
+    opacity: 1;
+    visibility: visible;
+}
+
+/* Conteúdo do modal */
+.modal-conteudo {
+    display: flex;
+    gap: 2em;
+    background: rgba(255, 255, 255, 0.85);
+    border-radius: 80px;
+    color: #000000;
+    align-items: center;
+    justify-content: space-around;
+    padding: 1em;
+    width: 90%;
+    height: 70%;
+}
+
+.modal.show .modal-conteudo.reveal {
+    opacity: 1;
+    visibility: visible;
+}
+
+/* Imagem principal do modal */
+.modal-conteudo>img {
+    width: 30vw;
+    height: 30vw;
+    border-radius: 50%;
+    box-shadow: 0 0 25px rgba(0, 0, 0, 0.3);
+    opacity: 1 !important;
+    /* nunca some */
+    transition: none !important;
+    /* sem fade */
+}
+
+/* Coluna da direita */
+.conteudo-direita {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    width: 50vw;
+    opacity: 0;
+    transform: translateY(10px);
+    transition: opacity 0.4s ease, transform 0.4s ease;
+}
+
+.modal.show .conteudo-direita {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Cada bloco (imagem + texto) */
+.item {
+    display: flex;
+    align-items: center;
+    gap: 1em;
+    text-align: end;
+    flex-direction: row-reverse;
+}
+
+.item img {
+    width: 10vw;
+    height: 10vw;
+    border-radius: 30px;
+    object-fit: cover;
+}
+
+.item p {
+    font-size: 0.8rem;
+    line-height: 1.5;
+    flex: 1;
+    text-align: justify;
+}
+
+.item.invertido {
+    display: flex;
+    flex-direction: row-reverse;
+    text-align: start;
+    gap: 1em;
+}
+
+/* ------------------------------ */
+/* CLONE DA IMAGEM ANIMADA        */
+/* ------------------------------ */
+.clone-img {
+    position: fixed;
+    z-index: 2000;
+    border-radius: 50%;
+    object-fit: cover;
+    transition: all 0.6s ease-in-out;
+    pointer-events: none;
+}
+
+.nav-btn {
+    width: 2rem;
+    height: 2rem;
+    background: rgba(0, 0, 0, 0.3);
+    color: white;
+    border: none;
+    cursor: pointer;
+    padding: 0.5rem;
+    border-radius: 50%;
+    transition: ease 0.3s;
+    align-self: center;
+}
+
+.nav-btn:hover {
+  background: rgba(0, 0, 0, 0.6);
+}
+
+
+
+
+
+/* estado inicial para transição */
+.slide-out-left {
+  animation: slideOutLeft 0.5s forwards;
+}
+.slide-in-right {
+  animation: slideInRight 0.5s forwards;
+}
+.slide-out-right {
+  animation: slideOutRight 0.5s forwards;
+}
+.slide-in-left {
+  animation: slideInLeft 0.5s forwards;
+}
+
+/* Keyframes */
+@keyframes slideOutLeft {
+  from { transform: translateX(0); opacity: 1; }
+  to { transform: translateX(-100%); opacity: 0; }
+}
+
+@keyframes slideInRight {
+  from { transform: translateX(100%); opacity: 0; }
+  to { transform: translateX(0); opacity: 1; }
+}
+
+@keyframes slideOutRight {
+  from { transform: translateX(0); opacity: 1; }
+  to { transform: translateX(100%); opacity: 0; }
+}
+
+@keyframes slideInLeft {
+  from { transform: translateX(-100%); opacity: 0; }
+  to { transform: translateX(0); opacity: 1; }
+}
